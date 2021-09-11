@@ -1,0 +1,112 @@
+def myVar = 'initial_value'
+
+pipeline {
+    agent any
+    
+    environment {
+        DOCKER_USER = credentials('DOCKER_USER')
+        DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
+    }
+
+    stages {
+        stage('Git checkout') {
+            steps {
+                sh(script: """
+
+                """, returnStdout: true)
+            }
+        }
+        stage('Dockerfile hadolint') {
+            steps {
+                sh(script: """
+
+                """, returnStdout: true)
+            }
+        }
+        stage('Test application') {
+            steps {
+                sh(script: """
+
+                """, returnStdout: true)
+            }
+        }
+        stage('Docker build') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Docker tag') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Docker Push') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Kubernetes deploy') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Kubernetes smoke test') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Kubernetes replace old application') {
+            steps {
+                sh(script: """ 
+                    docker --version
+                    """, returnStdout: true)
+            } 
+        }
+        stage('Kubernetes remove old application') {
+            steps {
+                echo "${myVar}"
+                script {
+                    myVar = sh(script: """ 
+                    aws --version
+                    """, returnStdout: true)
+                }
+                echo "${myVar}"
+            } 
+        }
+        stage('Docker remove images') {
+            steps {
+                echo "${myVar}"
+            } 
+        }
+        // stage('Hello') {
+        //     steps {
+        //         echo 'Hello World'
+        //         echo "my-image:${env.BUILD_ID}"
+            
+        //         // Get some code from a GitHub repository
+        //         git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+
+        //         // Run Maven on a Unix agent.
+        //         sh "mvn -Dmaven.test.failure.ignore=true clean package"
+
+        //         // To run Maven on a Windows agent, use
+        //         // bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                
+        //         // docker
+        //         // dockerVersion=$(docker --version)
+        //         // echo $dockerVersion
+            
+        //     }
+        // }
+    }
+}
