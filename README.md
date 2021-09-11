@@ -8,6 +8,19 @@ icacls.exe jenkins.pem /inheritance:r
 
 ssh -i "jenkins.pem" ubuntu@ec2-54-167-65-199.compute-1.amazonaws.com
 
+
+aws cloudformation create-stack --stack-name eksClusterRole-CloudFormation --region us-east-1 --template-body file://role.yml --capabilities "CAPABILITY_IAM"
+
+aws eks create-cluster --region us-east-1 --name devops-capstone-eks --kubernetes-version 1.20 --role-arn arn:aws:iam::993544404756:role/eksClusterRole-CloudFormation-eksClusterRole-14FP6W0VZAWZK --resources-vpc-config subnetIds=subnet-78bbc259,subnet-318c8f7c,subnet-42d4a81d,subnet-12cbb874,securityGroupIds=sg-0e607918ae88e77a0
+
+
+## hadolint for Dockerfile
+```
+sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64
+
+chmod +x /bin/hadolint
+```
+
 # create an ec2 ubuntu and install packages:
 
 ```

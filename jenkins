@@ -1,4 +1,8 @@
-def myVar = 'initial_value'
+// def myVar = 'initial_value'
+// def buildID = ${env.BUILD_ID}
+def URL = ''
+def OLD_BACKEND = ''
+def NEW_BACKEND = ''
 
 pipeline {
     agent any
@@ -12,80 +16,131 @@ pipeline {
         stage('Git checkout') {
             steps {
                 sh(script: """
-
+                git clone https://github.com/fr3d3rico/devops-capstone.git
+                cd ./devops-capstone/backend
                 """, returnStdout: true)
             }
         }
-        stage('Dockerfile hadolint') {
+        stage('Dockerfile hadolint v2.7.0') {
             steps {
                 sh(script: """
-
+                cd ./devops-capstone/backend
+                hadoling Dockerfile
                 """, returnStdout: true)
             }
         }
         stage('Test application') {
             steps {
                 sh(script: """
-
+                cd ./devops-capstone/backend
+                npm run test
                 """, returnStdout: true)
             }
         }
         stage('Docker build') {
             steps {
                 sh(script: """ 
-                    docker --version
+                    docker build -t udacity-web-app ./devops-capstone/backend
                     """, returnStdout: true)
             } 
         }
         stage('Docker tag') {
             steps {
                 sh(script: """ 
-                    docker --version
+                    docker tag udacity-web-app fr3d3rico/udacity-web-app:latest
                     """, returnStdout: true)
             } 
         }
         stage('Docker Push') {
             steps {
                 sh(script: """ 
-                    docker --version
+                    docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+                    docker push fr3d3rico/udacity-web-app:latest
                     """, returnStdout: true)
             } 
         }
         stage('Kubernetes deploy') {
             steps {
-                sh(script: """ 
-                    docker --version
+                script {
+                    OLD_BACKEND = sh(script: """ 
+                    kubectl get deployment -o=jsonpath={.items[*].metadata.name}
                     """, returnStdout: true)
+                }
+                echo "OLD_BACKEND=$OLD_BACKEND"
+                //curl -H "Content-Type: text/plain" -H "token: b614fca1-86e7-4215-b1af-6fd45ce24223" --request PUT --data "$OLD_BACKEND" https://api.memstash.io/values/OLD_BACKEND_${env.BUILD_ID}
+
+                script {
+                    NEW_BACKEND = ${env.BUILD_ID}
+                }
+                echo "NEW_BACKEND=$NEW_BACKEND"
+                //curl -H "Content-Type: text/plain" -H "token: b614fca1-86e7-4215-b1af-6fd45ce24223" --request PUT --data "$NEW_BACKEND" https://api.memstash.io/values/NEW_BACKEND_${env.BUILD_ID}
+
+                curl https://raw.githubusercontent.com/fr3d3rico/devops-capstone/main/deployment.yml -o deployment.yml
+                SED_REPLACE="s/BUILD_ID/${env.BUILD_ID}/"
+                sed -i $SED_REPLACE deployment.yml
+
+                curl https://raw.githubusercontent.com/fr3d3rico/devops-capstone/main/service.yml -o service.yml
+                SED_REPLACE="s/BUILD_ID/${env.BUILD_ID}/"
+                sed -i $SED_REPLACE service.yml
             } 
         }
         stage('Kubernetes smoke test') {
             steps {
-                sh(script: """ 
-                    docker --version
+                script {
+                    URL = sh(script: """ 
+                    kubectl get service --sort-by=.metadata.creationTimestamp -o=jsonpath={.items[2].status.loadBalancer.ingress[0].hostname} | head -1
                     """, returnStdout: true)
+                }
+                
+                URL="http://${URL}:3000"
+
+                if curl -s ${URL} | grep "Hello World!"
+                then
+                  return 0
+                else
+                  return 1
+                fi
             } 
         }
         stage('Kubernetes replace old application') {
             steps {
-                sh(script: """ 
-                    docker --version
+                curl https://raw.githubusercontent.com/fr3d3rico/cloud-developer-capstone/main/apigateway.yml -o apigateway.yml
+
+                SED_REPLACE="s/NEW_BACKEND/${URL}/"
+
+                sed -i $SED_REPLACE apigateway.yml
+
+                script {
+                    sh(script: """ 
+                    aws apigatewayv2 reimport-api --body file://apigateway.yml --api-id $AWS_API_GATEWAY_ID
                     """, returnStdout: true)
+                }
             } 
         }
         stage('Kubernetes remove old application') {
             steps {
-                echo "${myVar}"
+                // echo "${myVar}"
+                // script {
+                //     myVar = sh(script: """ 
+                //     aws --version
+                //     """, returnStdout: true)
+                // }
+                // echo "${myVar}"
                 script {
-                    myVar = sh(script: """ 
-                    aws --version
+                    sh(script: """ 
+                    kubectl delete deployment,service $OLD_BACKEND
                     """, returnStdout: true)
                 }
-                echo "${myVar}"
+                
             } 
         }
         stage('Docker remove images') {
             steps {
-                echo "${myVar}"
+                script {
+                    sh(script: """ 
+                    docker rmi $(docker images -q)
+                    """, returnStdout: true)
+                }
             } 
         }
         // stage('Hello') {
