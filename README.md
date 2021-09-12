@@ -6,12 +6,20 @@ icacls.exe jenkins.pem /grant:r "$($env:username):(r)"
 icacls.exe jenkins.pem /inheritance:r
 ```
 
-ssh -i "jenkins.pem" ubuntu@ec2-54-167-65-199.compute-1.amazonaws.com
+
 
 
 aws cloudformation create-stack --stack-name eksClusterRole-CloudFormation --region us-east-1 --template-body file://role.yml --capabilities "CAPABILITY_IAM"
 
-aws eks create-cluster --region us-east-1 --name devops-capstone-eks --kubernetes-version 1.20 --role-arn arn:aws:iam::993544404756:role/eksClusterRole-CloudFormation-eksClusterRole-14FP6W0VZAWZK --resources-vpc-config subnetIds=subnet-78bbc259,subnet-318c8f7c,subnet-42d4a81d,subnet-12cbb874,securityGroupIds=sg-0e607918ae88e77a0
+aws eks create-cluster --region us-east-1 --name devops-capstone-eks --kubernetes-version 1.21 --role-arn arn:aws:iam::993544404756:role/eksClusterRole-CloudFormation-eksClusterRole-MMZNGBVGQO30 --resources-vpc-config subnetIds=subnet-78bbc259,subnet-318c8f7c,subnet-42d4a81d,subnet-12cbb874,securityGroupIds=sg-0e607918ae88e77a0
+
+aws eks --region us-east-1 update-kubeconfig --name devops-capstone-eks
+
+
+
+
+kubectl apply -f deployment.yml
+kubectl apply -f service.yml
 
 
 ## hadolint for Dockerfile
