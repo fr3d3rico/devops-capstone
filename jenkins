@@ -29,6 +29,22 @@ pipeline {
                 """, returnStdout: true)
             }
         }
+        stage('Npm Install Dependencies') {
+            steps {
+                sh(script: """
+                cd ./devops-capstone/backend
+                npm i
+                """, returnStdout: true)
+            }
+        }
+        stage('Npm Scan') {
+            steps {
+                sh(script: """
+                cd ./devops-capstone/backend
+                npm audit fix --audit-level=critical --force
+                """, returnStdout: true)
+            }
+        }
         stage('Test application') {
             steps {
                 sh(script: """
@@ -112,7 +128,7 @@ pipeline {
 
                 script {
                     sh(script: """ 
-                    aws apigatewayv2 reimport-api --body file://apigateway.yml --api-id $AWS_API_GATEWAY_ID
+                    aws apigatewayv2 reimport-api --body file://apigateway.yml --api-id 595oh68rv7
                     """, returnStdout: true)
                 }
             } 
