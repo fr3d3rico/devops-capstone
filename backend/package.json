@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Udacity Cloud Developer Capstone",
+  "description": "Udacity Devops Capstone",
   "main": "index.js",
   "scripts": {
     "test": "mocha app/test/*.js",
