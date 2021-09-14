@@ -1,0 +1,60 @@
+version: 2.1
+
+jobs:
+
+  install-backend-dependencies:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-install]
+      - run:
+          name: Back-end install
+          command: |
+             cd backend
+             npm i
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-install
+
+  scan-backend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-install]
+      - run:
+          name: Scan Back-end
+          command: |
+            cd backend
+            npm audit fix --audit-level=critical --force
+
+  test-backend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-install]
+      - run:
+          name: Test Back-end
+          command: |
+            cd backend
+            npm run test
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-install
+
+workflows:
+  default:
+    jobs:
+      - install-backend-dependencies
+          filters:
+            branches:
+              only: [main]
+      - scan-backend:
+          requires: [install-backend-dependencies]
+      - test-backend:
+          requires: [scan-backend]
