@@ -15,7 +15,7 @@ Resources:
             Service:
             - eks.amazonaws.com
             AWS:
-            - arn:aws:iam::993544404756:user/devops-capstone-eks
+            - arn:aws:iam::<AWS_ID_USER_ACCOUNT>:user/devops-capstone-eks
           Action:
           - sts:AssumeRole
       ManagedPolicyArns:
