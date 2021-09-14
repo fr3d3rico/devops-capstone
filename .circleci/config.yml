@@ -50,7 +50,7 @@ jobs:
 workflows:
   default:
     jobs:
-      - install-backend-dependencies
+      - install-backend-dependencies:
           filters:
             branches:
               only: [main]
