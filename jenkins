@@ -108,9 +108,9 @@ pipeline {
                 }
             } 
         }
-        stage('Wait service getting up(3 minutes)') {
+        stage('Wait service getting up(4 minutes)') {
             steps {
-                sh 'sleep 3m'
+                sh 'sleep 4m'
             }
         }
         stage('Kubernetes smoke test') {
