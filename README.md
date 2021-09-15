@@ -24,6 +24,17 @@ I decided to create an EC2 Ubuntu instance outside the Kubernetes cluster. This 
 | Open JDK 11 | apt install openjdk-11-jdk |
 
 
+## How to access this app?
+
+This is app is functional using the following url provided by AWS API Gateway:
+
+[https://595oh68rv7.execute-api.us-east-1.amazonaws.com](https://595oh68rv7.execute-api.us-east-1.amazonaws.com)
+
+or
+
+[https://595oh68rv7.execute-api.us-east-1.amazonaws.com/hello/YOUR_NAME](https://595oh68rv7.execute-api.us-east-1.amazonaws.com/hello/YOUR_NAME)
+
+
 ## Jenkins Pipelines
 
 ### eks-create-cluster (jenkins-create-cluster)
