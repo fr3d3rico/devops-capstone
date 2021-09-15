@@ -77,9 +77,8 @@ jobs:
             cd backend
             docker build -t udacity-web-app .
             docker tag udacity-web-app fr3d3rico/udacity-web-app:latest
-          #  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
             docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-            sudo docker push fr3d3rico/udacity-web-app:latest
+            docker push fr3d3rico/udacity-web-app:latest
       # - docker/check
       # - docker/build:
       #     image: fr3d3rico/udacity-web-app:latest
