@@ -64,16 +64,16 @@ jobs:
           paths: [backend/node_modules]
           key: backend-install
 
-  build-and-push-docker:
-    executor: docker/docker
-    steps:
-      - checkout
-      - run:
-          name: Get in dir
-          command: |
-            cd backend
-      - docker/publish:
-          image: fr3d3rico/udacity-web-app:latest
+  # build-and-push-docker:
+  #   executor: docker/docker
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: Get in dir
+  #         command: |
+  #           cd backend
+  #     - docker/publish:
+  #         image: fr3d3rico/udacity-web-app:latest
 
 workflows:
   default:
@@ -90,3 +90,7 @@ workflows:
           requires: [eslint-backend]
       - build-and-push-docker:
           requires: [test-backend]
+          jobs:
+            - docker/publish:
+                image: fr3d3rico/udacity-web-app:latest
+                update-description: false
