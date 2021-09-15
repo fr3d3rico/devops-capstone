@@ -1,7 +1,7 @@
 [
     {
         "ParameterKey": "EksClusterName",
-        "ParameterValue": "devops-capstone-eks-NEW-PIPELINE"
+        "ParameterValue": "devops-capstone-eks"
     },
     {
         "ParameterKey": "SecurityGroupParam",

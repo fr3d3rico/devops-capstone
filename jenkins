@@ -78,7 +78,6 @@ pipeline {
             //https://askubuntu.com/a/6735
             steps {
                 script {
-                    //optional
                     sh 'aws eks --region us-east-1 update-kubeconfig --name devops-capstone-eks'
                     
                     OLD_BACKEND = sh(script: "kubectl get deployment -o=jsonpath={.items[*].metadata.name}", returnStdout: true).trim()

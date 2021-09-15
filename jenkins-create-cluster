@@ -31,6 +31,11 @@ pipeline {
                 """, returnStdout: true)
             }
         }
+        stage('Wait cluster getting up(20 minutes)') {
+            steps {
+                sh 'sleep 20m'
+            }
+        }
         stage('Dockerfile hadolint v2.7.0') {
             steps {
                 sh(script: """
@@ -85,6 +90,10 @@ pipeline {
         }
         stage('Kubernetes deploy') { 
             steps {
+                script {
+                    sh 'aws eks --region us-east-1 update-kubeconfig --name devops-capstone-eks'
+                }
+
                 script {
                     SED_REPLACE="s/BUILD_ID/${env.BUILD_ID}/"
 
