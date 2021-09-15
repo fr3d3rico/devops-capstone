@@ -23,6 +23,28 @@ I decided to create an EC2 Ubuntu instance outside the Kubernetes cluster. This 
 | Hadlint | (ttps://github.com/hadolint/hadolint/releases/download/v2.7.0/hadolint-Linux-x86_64) |
 | Open JDK 11 | apt install openjdk-11-jdk |
 
+## Docker Hadolint Test
+
+The images below show how was the docker file hadolint test.
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-1.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-1.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-2.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-2.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-3.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-3.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-4.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-4.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-5.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-5.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-6.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-6.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-7.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-7.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-8.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-8.JPG)
+
+[![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-9.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-9.JPG)
+
 
 ## How to access this app?
 
