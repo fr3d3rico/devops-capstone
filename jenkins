@@ -44,6 +44,15 @@ pipeline {
                 """, returnStdout: true)
             }
         }
+        stage('Backend lint') {
+            steps {
+                sh(script: """
+                cd ./devops-capstone/backend
+                npm i -D
+                npm run eslint
+                """, returnStdout: true)
+            }
+        }
         stage('Test application') {
             steps {
                 sh(script: """
