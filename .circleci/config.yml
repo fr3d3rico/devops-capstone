@@ -65,6 +65,7 @@ jobs:
   #         key: backend-install
 
   build-and-push-docker:
+    working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
     steps:
@@ -76,7 +77,7 @@ jobs:
             cd backend
             docker build -t udacity-web-app .
             docker tag udacity-web-app fr3d3rico/udacity-web-app:latest
-            echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
             sudo docker push fr3d3rico/udacity-web-app:latest
       # - docker/check
       # - docker/build:
@@ -97,5 +98,5 @@ workflows:
       #     requires: [scan-backend]
       # - test-backend:
       #     requires: [eslint-backend]
-      - build-and-push-docker:
+      - build-and-push-docker
           # requires: [test-backend]
