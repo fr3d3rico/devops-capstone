@@ -1,0 +1,17 @@
+Resources:
+  EKSNodegroup:
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      ClusterName: devops-capstone-eks-teste
+      NodeRole: 'arn:aws:iam::993544404756:role/eks-node-group-capstone'
+      ScalingConfig:
+        MinSize: 1
+        DesiredSize: 1
+        MaxSize: 1
+      Labels:
+        Key1: EKS_Node_Group
+      Subnets:
+        - subnet-78bbc259
+        - subnet-318c8f7c
+        - subnet-42d4a81d
+        - subnet-12cbb874 
