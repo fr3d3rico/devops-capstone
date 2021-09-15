@@ -69,7 +69,7 @@ The images below show a successfull pipeline execution.
 ## How to access this app?
 
 Jenkins
-[Jenkins link](http://ec2-54-146-216-193.compute-1.amazonaws.com:8080)
+[Jenkins link](http://ec2-35-175-197-220.compute-1.amazonaws.com:8080)
 
 This is app is functional using the following url provided by AWS API Gateway:
 
