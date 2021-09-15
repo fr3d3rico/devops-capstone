@@ -48,6 +48,9 @@ The images below show how was the docker file hadolint test.
 
 ## How to access this app?
 
+Jenkins
+[ec2-54-146-216-193.compute-1.amazonaws.com:8080](ec2-54-146-216-193.compute-1.amazonaws.com:8080)
+
 This is app is functional using the following url provided by AWS API Gateway:
 
 [https://595oh68rv7.execute-api.us-east-1.amazonaws.com](https://595oh68rv7.execute-api.us-east-1.amazonaws.com)
