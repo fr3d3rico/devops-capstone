@@ -97,5 +97,5 @@ workflows:
       #     requires: [scan-backend]
       # - test-backend:
       #     requires: [eslint-backend]
-      - build-and-push-docker:
+      - build-and-push-docker
           # requires: [test-backend]
