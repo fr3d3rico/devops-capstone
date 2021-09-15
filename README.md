@@ -46,10 +46,30 @@ The images below show how was the docker file hadolint test.
 [![Hadolint](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-9.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/hadolint-9.JPG)
 
 
+## Successfull deploy!
+
+The images below show a successfull pipeline execution.
+
+* Pipeline 96 deployed!
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-96.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-96.JPG)
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)
+
+* Pipeline 97 started and running!
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)
+
+* Pipeline 97 deployed and working!
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)
+
 ## How to access this app?
 
 Jenkins
-[ec2-54-146-216-193.compute-1.amazonaws.com:8080](ec2-54-146-216-193.compute-1.amazonaws.com:8080)
+[ec2-54-146-216-193.compute-1.amazonaws.com:8080](http://ec2-54-146-216-193.compute-1.amazonaws.com:8080)
 
 This is app is functional using the following url provided by AWS API Gateway:
 
