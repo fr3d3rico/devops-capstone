@@ -67,11 +67,13 @@ jobs:
   build-and-push-docker:
     executor: docker/docker
     steps:
-      - setup_remote_docker
       - checkout
-      - docker/check
-      - docker/build:
-          image: fr3d3rico/udacity-web-app
+      - run:
+          name: Get in dir
+          command: |
+            cd backend
+      - docker/publish:
+          image: fr3d3rico/udacity-web-app:latest
 
 workflows:
   default:
