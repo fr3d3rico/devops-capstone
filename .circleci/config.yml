@@ -65,11 +65,16 @@ jobs:
   #         key: backend-install
 
   build-and-push-docker:
-    machine: true
+    docker:
+      - image: circleci/golang:1.15
+          auth:
+            username: fr3d3rico
+            password: $DOCKER_PASSWORD
     steps:
-      - setup_remote_docker:
-          version: 19.03.13
       - checkout
+      - setup_remote_docker:
+          version: 20.10.7
+          docker_layer_caching: true
       - run:
           name: Docker Build and Push
           command: |
