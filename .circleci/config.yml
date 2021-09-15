@@ -71,7 +71,7 @@ jobs:
       - checkout
       - docker/check
       - docker/build:
-          image: fr3d3rico/udacity-web-app:latest
+          image: fr3d3rico/udacity-web-app
 
 workflows:
   default:
