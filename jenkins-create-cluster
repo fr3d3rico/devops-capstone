@@ -125,7 +125,7 @@ pipeline {
                 script {
                     try {
                         URL = sh(script: """ 
-                        kubectl get service --sort-by=.metadata.creationTimestamp -o=jsonpath={.items[2].status.loadBalancer.ingress[0].hostname} | head -1
+                        kubectl get service --sort-by=.metadata.creationTimestamp -o=jsonpath={.items[1].status.loadBalancer.ingress[0].hostname} | head -1
                         """, returnStdout: true)
 
                         SED_REPLACE="s/NEW_BACKEND/${URL}/"
