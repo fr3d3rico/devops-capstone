@@ -1,22 +1,28 @@
 def URL = ''
-def OLD_BACKEND = ''
-def NEW_BACKEND = ''
 
 pipeline {
     agent any
-    
+
     environment {
         DOCKER_USER = credentials('DOCKER_USER')
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
     }
-
+    
     stages {
         stage('Git checkout') {
             steps {
                 sh(script: """
                 rm -r devops-capstone
                 git clone https://github.com/fr3d3rico/devops-capstone.git
-                cd ./devops-capstone/backend
+                cd ./devops-capstone/cloudformation
+                """, returnStdout: true)
+            }
+        }
+        stage('Create cluster') {
+            steps {
+                sh(script: """
+                cd ./devops-capstone/cloudformation
+                aws cloudformation create-stack --stack-name eksNewCluster-Udacity --region us-east-1 --template-body file://eks-cluster.yml --parameters file://eks-cluster-parameters.json
                 """, returnStdout: true)
             }
         }
@@ -55,14 +61,14 @@ pipeline {
         stage('Docker build') {
             steps {
                 sh 'sudo docker build -t udacity-web-app ./devops-capstone/backend'
-            }
+            } 
         }
         stage('Docker tag') {
             steps {
                 sh(script: """ 
                     sudo docker tag udacity-web-app fr3d3rico/udacity-web-app:latest
                     """, returnStdout: true)
-            }
+            } 
         }
         stage('Docker Push') {
             steps {
@@ -70,24 +76,10 @@ pipeline {
                     sudo docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
                     sudo docker push fr3d3rico/udacity-web-app:latest
                     """, returnStdout: true)
-            }
+            } 
         }
         stage('Kubernetes deploy') { 
-            //https://serverfault.com/questions/724730/unable-to-use-aws-cli-in-jenkins-due-to-unable-to-locate-credentials-error
-            //https://serverfault.com/a/1059988
-            //https://askubuntu.com/a/6735
             steps {
-                script {
-                    //optional
-                    sh 'aws eks --region us-east-1 update-kubeconfig --name devops-capstone-eks'
-                    
-                    OLD_BACKEND = sh(script: "kubectl get deployment -o=jsonpath={.items[*].metadata.name}", returnStdout: true).trim()
-                    echo "OLD_BACKEND=$OLD_BACKEND"
-
-                    NEW_BACKEND = sh(script: "echo ${env.BUILD_ID}", returnStdout: true).trim()
-                    echo "NEW_BACKEND=$NEW_BACKEND"
-                }
-
                 script {
                     SED_REPLACE="s/BUILD_ID/${env.BUILD_ID}/"
 
@@ -107,41 +99,11 @@ pipeline {
                     kubectl apply -f service.yml
                     """, returnStdout: true)
                 }
-            }
+            } 
         }
         stage('Wait service getting up(5 minutes)') {
             steps {
                 sh 'sleep 5m'
-            }
-        }
-        stage('Kubernetes smoke test') {
-            steps {
-                script {
-                    try {
-                        URL = sh(script: """ 
-                        kubectl get service --sort-by=.metadata.creationTimestamp -o=jsonpath={.items[2].status.loadBalancer.ingress[0].hostname} | head -1
-                        """, returnStdout: true)
-                    
-                        COMPLETE_URL="http://${URL}:3000"
-
-                        sh(script: """ 
-                        if curl -s ${COMPLETE_URL} | grep "Hello World!"
-                        then
-                        return 0
-                        else
-                        return 1
-                        fi
-                        """, returnStdout: true)
-                    }
-                    catch(Exception e) {
-                        echo 'Exception occurred: ' + e.toString()
-                        sh(script: """ 
-                        kubectl delete deployment,service backend-$NEW_BACKEND
-                        """, returnStdout: true)
-
-                        throw new Exception("Error - Kubernetes smoke test")
-                    }
-                }
             }
         }
         stage('Kubernetes replace old application') {
@@ -166,31 +128,16 @@ pipeline {
                     }
                     catch(Exception e) {
                         echo 'Exception occurred: ' + e.toString()
-                        sh(script: """ 
-                        kubectl delete deployment,service backend-$NEW_BACKEND
-                        """, returnStdout: true)
-
-                        throw new Exception("Error - Kubernetes replace old application")
                     }
                 }
-            }
-        }
-        stage('Kubernetes remove old application') {
-            steps {
-                script {
-                    sh(script: """ 
-                    kubectl delete deployment,service $OLD_BACKEND
-                    """, returnStdout: true)
-                }
-                
-            }
+            } 
         }
         stage('Docker remove images') {
             steps {
                 sh(script: """ 
                 sudo docker image prune
                 """, returnStdout: true)
-            }
+            } 
         }
     }
 }
