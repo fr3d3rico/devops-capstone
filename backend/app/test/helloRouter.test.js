@@ -1,36 +1,36 @@
-const request = require('supertest')
-const assert = require('assert')
-const app = require('../app')
+const request = require('supertest');
+const assert = require('assert');
+const app = require('../app');
 
 describe('Testing Server URL', () => {
-    const agent = request.agent(app)
+    const agent = request.agent(app);
 
     it('Test GET / - Should return status response 200', (done) => {
         request(app)
             .get('/')
             .expect(200)
             .expect((res) => {
-                assert.equal(res.text, "Hello World!")
+                assert.equal(res.text, "Hello World!");
             })
             .end((err, res) => {
                 if (err) throw err;
 
-                return done()
-            })
-    })
+                return done();
+            });
+    });
 
     it('Test GET /:name - /Fred should response Hello Fred!', (done) => {
         request(app)
             .get('/Fred')
             .expect(200)
             .expect((res) => {
-                assert.equal(res.text, "Hello Fred!")
+                assert.equal(res.text, "Hello Fred!");
             })
             .end((err, res) => {
                 if (err) throw err;
 
-                return done()
-            })
-    })
+                return done();
+            });
+    });
 
-})
+});
