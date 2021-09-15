@@ -11,11 +11,16 @@ pipeline {
     stages {
         stage('Git checkout') {
             steps {
-                sh(script: """
-                rm -r devops-capstone
-                git clone https://github.com/fr3d3rico/devops-capstone.git
-                cd ./devops-capstone/cloudformation
-                """, returnStdout: true)
+                script {
+                    try {
+                        sh 'rm -r devops-capstone'
+                    }
+                    catch(Exception e) {}
+                    sh(script: """
+                    git clone https://github.com/fr3d3rico/devops-capstone.git
+                    cd ./devops-capstone/cloudformation
+                    """, returnStdout: true)
+                }
             }
         }
         stage('Create cluster') {
