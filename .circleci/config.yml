@@ -65,7 +65,7 @@ jobs:
   #         key: backend-install
 
   build-and-push-docker:
-    docker: docker/docker
+    docker: 
       - image: circleci/node:13.8.0
     steps:
       - setup_remote_docker:
