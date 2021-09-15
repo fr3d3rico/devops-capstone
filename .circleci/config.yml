@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@1.7.0
+
 jobs:
 
   install-backend-dependencies:
@@ -61,6 +64,15 @@ jobs:
           paths: [backend/node_modules]
           key: backend-install
 
+  build-and-push-docker:
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: fr3d3rico/udacity-web-app:latest
+
 workflows:
   default:
     jobs:
@@ -74,3 +86,5 @@ workflows:
           requires: [scan-backend]
       - test-backend:
           requires: [eslint-backend]
+      - build-and-push-docker:
+          requires: [test-backend]
