@@ -56,20 +56,20 @@ The images below show a successfull pipeline execution.
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)
 
-* Pipeline 97 started and running!
+* Pipeline 97 started and working!
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)
 
-* Pipeline 97 deployed and working!
+* Pipeline 97 deployed and running!
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)
 
 ## How to access this app?
 
 Jenkins
-[ec2-54-146-216-193.compute-1.amazonaws.com:8080](http://ec2-54-146-216-193.compute-1.amazonaws.com:8080)
+[Jenkins link](http://ec2-54-146-216-193.compute-1.amazonaws.com:8080)
 
 This is app is functional using the following url provided by AWS API Gateway:
 
