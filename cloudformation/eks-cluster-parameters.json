@@ -1,0 +1,26 @@
+[
+    {
+        "ParameterKey": "EksClusterName",
+        "ParameterValue": "devops-capstone-eks-NEW-PIPELINE"
+    },
+    {
+        "ParameterKey": "SecurityGroupParam",
+        "ParameterValue": "sg-0e607918ae88e77a0"
+    },
+    {
+        "ParameterKey": "Subnet1",
+        "ParameterValue": "subnet-78bbc259"
+    },
+    {
+        "ParameterKey": "Subnet2",
+        "ParameterValue": "subnet-318c8f7c"
+    },
+    {
+        "ParameterKey": "Subnet3",
+        "ParameterValue": "subnet-42d4a81d"
+    },
+    {
+        "ParameterKey": "Subnet4",
+        "ParameterValue": "subnet-12cbb874"
+    }
+]

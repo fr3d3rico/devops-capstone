@@ -1,0 +1,56 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-eks-cluster.html
+Parameters:
+    EksClusterName:
+      Description: EKS Cluster Name
+      Type: String
+    Subnet1:
+      Description: Subnet1
+      Type: String
+    Subnet2:
+      Description: Subnet2
+      Type: String
+    Subnet3:
+      Description: Subnet3
+      Type: String
+    Subnet4:
+      Description: Subnet4
+      Type: String
+    SecurityGroupParam:
+      Description: SecurityGroupParam
+      Type: String
+
+Resources:
+  myCluster:
+    Type: 'AWS::EKS::Cluster'
+    Properties:
+      Name: !Ref EksClusterName
+      Version: '1.20'
+      RoleArn: >-
+        arn:aws:iam::993544404756:role/eksClusterRole-CloudFormation-eksClusterRole-MMZNGBVGQO30
+      ResourcesVpcConfig:
+        SecurityGroupIds:
+          - !Ref SecurityGroupParam 
+        SubnetIds:
+          - !Ref Subnet1
+          - !Ref Subnet2
+          - !Ref Subnet3
+          - !Ref Subnet4
+        
+  EKSNodegroup:
+    Type: 'AWS::EKS::Nodegroup'
+    DependsOn: myCluster
+    Properties:
+      ClusterName: !Ref EksClusterName
+      NodeRole: 'arn:aws:iam::993544404756:role/eks-node-group-capstone'
+      ScalingConfig:
+        MinSize: 1
+        DesiredSize: 1
+        MaxSize: 1
+      Labels:
+        Key1: EKS_Node_Group
+      Subnets:
+        - !Ref Subnet1
+        - !Ref Subnet2
+        - !Ref Subnet3
+        - !Ref Subnet4 
+          
