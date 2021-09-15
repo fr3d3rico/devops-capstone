@@ -42,6 +42,7 @@ jobs:
           name: ESLint Back-end
           command: |
             cd backend
+            npm i -D
             npm run eslint
 
   test-backend:
