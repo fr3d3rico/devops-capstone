@@ -73,11 +73,15 @@ jobs:
           name: Get in dir
           command: |
             cd backend
-      - docker/check
-      - docker/build:
-          image: fr3d3rico/udacity-web-app:latest
-      - docker/push:
-          image: fr3d3rico/udacity-web-app:latest
+            docker build -t udacity-web-app .
+            docker tag udacity-web-app fr3d3rico/udacity-web-app:latest
+            sudo docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            sudo docker push fr3d3rico/udacity-web-app:latest
+      # - docker/check
+      # - docker/build:
+      #     image: fr3d3rico/udacity-web-app:latest
+      # - docker/push:
+      #     image: fr3d3rico/udacity-web-app:latest
 
 workflows:
   default:
