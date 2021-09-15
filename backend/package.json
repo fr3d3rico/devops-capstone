@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha app/test/*.js",
+    "eslint": "eslint server.js app/**",
     "start": "node server.js"
   },
   "keywords": [

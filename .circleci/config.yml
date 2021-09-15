@@ -31,6 +31,19 @@ jobs:
             cd backend
             npm audit fix --audit-level=critical --force
 
+  eslint-backend:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-install]
+      - run:
+          name: ESLint Back-end
+          command: |
+            cd backend
+            npm run eslint
+
   test-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -56,5 +69,7 @@ workflows:
               only: [main]
       - scan-backend:
           requires: [install-backend-dependencies]
-      - test-backend:
+      - eslint-backend:
           requires: [scan-backend]
+      - test-backend:
+          requires: [eslint-backend]
