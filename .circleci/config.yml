@@ -88,9 +88,9 @@ workflows:
           requires: [scan-backend]
       - test-backend:
           requires: [eslint-backend]
-      - build-and-push-docker:
-          requires: [test-backend]
-          jobs:
-            - docker/publish:
-                image: fr3d3rico/udacity-web-app:latest
-                update-description: false
+      build-and-push-docker:
+        requires: [test-backend]
+        jobs:
+          - docker/publish:
+              image: fr3d3rico/udacity-web-app:latest
+              update-description: false
