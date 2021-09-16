@@ -66,11 +66,13 @@ The images below show a successfull pipeline execution.
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-running.JPG)
 
+* EC2 Instances
+
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances.JPG)
 
 [![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances2.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances2.JPG)
 
-* EC2 Instances
+
 
 ## How to access this app?
 
