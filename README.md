@@ -50,26 +50,32 @@ The images below show how was the docker file hadolint test.
 
 The images below show a successfull pipeline execution.
 
-* Pipeline 96 deployed!
+* Pipeline 101 deployed!
 
-[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-96.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-96.JPG)
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-101.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-101.JPG)
 
-[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-96.JPG)
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-101.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-101.JPG)
 
-* Pipeline 97 started and working!
+* Pipeline 102 started and working!
 
-[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-97-running.JPG)
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-102-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/deploy-102-running.JPG)
 
-[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-working.JPG)
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-working.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-working.JPG)
 
-* Pipeline 97 deployed and running!
+* Pipeline 102 deployed and running!
 
-[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-97-running.JPG)
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-running.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/kube-102-running.JPG)
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances.JPG)
+
+[![Deploy](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances2.JPG)](https://github.com/fr3d3rico/devops-capstone/blob/main/images/aws-ec2-instances2.JPG)
+
+* EC2 Instances
 
 ## How to access this app?
 
 Jenkins
-[Jenkins link](http://ec2-35-175-197-220.compute-1.amazonaws.com:8080)
+[Jenkins link](http://ec2-52-54-117-153.compute-1.amazonaws.com:8080)
 
 This is app is functional using the following url provided by AWS API Gateway:
 
